@@ -1,1 +1,34 @@
+name: Build 74 Tech FAP
 
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate mascot and icon PNGs
+        run: |
+          python3 -m pip install --upgrade pillow
+          python3 make_assets.py
+
+      - name: Build with uFBT
+        uses: flipperdevices/flipperzero-ufbt-action@v0.1
+        id: build-app
+        with:
+          sdk-channel: release
+
+      - name: Upload .fap artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 74tech-fap
+          path: ${{ steps.build-app.outputs.fap-artifacts }}
