@@ -1,0 +1,19 @@
+App(
+    appid="tech74",
+    name="74 Tech",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="tech74_app",
+    requires=[
+        "gui",
+        "storage",
+        "notification",
+    ],
+    stack_size=4 * 1024,
+    fap_category="Misc",
+    fap_icon="icon.png",
+    fap_icon_assets="images",
+    fap_icon_assets_symbol="tech74",
+    fap_author="74 Friday Tech",
+    fap_version="1.0",
+    fap_description="74 Friday Tech - bots, status, jobs, ideas and domes.",
+)
